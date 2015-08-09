@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+    <link rel="stylesheet" type="text/css" href="css/sampleproject_y.css">
+    <script type="text/javascript"
+            id="sap-ui-bootstrap"
+            src="resources/sap-ui-core.js"
+            data-sap-ui-language="en"
+            data-sap-ui-libs="sap.ui.commons, sap.ui.ux3"
+            data-sap-ui-theme="sap_bluecrystal">
+    </script>
+
+    <script type="text/javascript">
+        //Attach controls in UI
+        var btnH = new sap.ui.commons.Button("headerButton",{text: "Hello UI Area called 'Header'"}),
+        btnC = new sap.ui.commons.Button("contentButton", {text: "Hello UI Area called 'Content'"}),
+        btnF = new sap.ui.commons.Button("footerButton", {text: "Hello UI Area called 'Footer'"});
+
+        //        btnH.placeAt("header");
+        //        btnC.placeAt("content");
+        //        btnF.placeAt("footer");
+    </script>
+
+    <script type="text/javascript">
+        //Attach controls in UI and Add listeners
+        var textField = new sap.ui.commons.TextField("field", {value: "Value of field 1"}),
+        button = new sap.ui.commons.Button("button", {text: "button 1"});
+
+        textField.placeAt("content");
+        button.placeAt("content");
+
+        button.attachPress(function () {
+            var core = sap.ui.getCore().byId("field");
+            alert(core);
+            core = jQuery.sap.domById("field");
+            alert(core);
+            core = jQuery.sap.byId("field");
+            alert(core)
+        });
+    </script>
+
+    <script type="text/javascript"> /* MODEL BINDING */
+    //JSON sample data
+    var data = {
+        info: "John Doe, aged 38"
+    },
+    // create JSON model instance
+    model = new sap.ui.model.json.JSONModel(),
+    text;
+
+    //set data for the model
+    model.setData(data);
+
+    //assign model globally to the core
+    sap.ui.getCore().setModel(model);
+
+    //binding syntax using curly braces
+    text = new sap.ui.commons.TextField({
+        value: "{/info}"
+    });
+    text.placeAt("content");
+    </script>
+
+    <script type="text/javascript"> /* AGGREGATION BINDING */
+    var model = new sap.ui.model.json.JSONModel(),
+    itemTemplate = new sap.ui.core.ListItem("name", {
+        text: "{text}"
+    }),
+    comboBox;
+
+    model.setJSON('{"selection":"All Kinds", "data": [{"text":"Cucumber"}, {"text": "Radish"}, {"text": "Carrot"}, {"text": ""} ]}');
+
+    comboBox = new sap.ui.commons.ComboBox("ComboBox", {
+        items: {
+            path: "/data",
+            template: itemTemplate
+        }
+    });
+
+    comboBox.setModel(model);
+    comboBox.bindValue("/selection");
+
+    comboBox.placeAt("content");
+
+    </script>
+
+</head>
+<body class="sapUiBody" role="application">
+<div id="header">
+
+</div>
+<div id="content">
+
+</div>
+<div id="footer">
+
+</div>
+</body>
+</html>

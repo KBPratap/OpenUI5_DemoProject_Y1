@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+    <link rel="stylesheet" type="text/css" href="css/sampleproject_y.css">
+
+    <script type="text/javascript"
+            src="resources/sap-ui-core.js"
+            id="sap-ui-bootstrap"
+            data-sap-ui-language="en"
+            data-sap-ui-libs="sap.ui.commons, sap.ui.ux3"
+            data-sap-ui-theme="sap_bluecrystal">
+    </script>
+
+    <script type="text/javascript">
+        sap.ui.localResources("mvcExample");
+
+        //JS View
+        sap.ui.jsview("mvcExample.jsview", {
+            getControllerName: function () {
+                return "mvcExample.jsview";
+            },
+
+            createContent: function (controller) {
+                var button = new sap.ui.commons.Button({
+                    id: "jsview_btn",
+                    text: "JS View Button",
+                    press: function (e) {
+                        alert("JS View Button pressed!")
+                    }
+                });
+
+                return button;
+            }
+        });
+
+        //JS View Controller
+        sap.ui.controller("mvcExample.jsview", {});
+
+        //Placement in UI
+        var myView = sap.ui.view({
+            id: "js1",
+            viewName: "mvcExample.jsview",
+            type: sap.ui.core.mvc.ViewType.JS
+        });
+
+        myView.placeAt("content");
+    </script>
+
+    <script type="text/javascript">
+        sap.ui.controller("sap.hcm.Address", {
+            onInit: function () {
+
+            },
+
+            onBeforeRendering: function () {
+
+            },
+
+            onAfterRendering: function () {
+
+            },
+
+            onExit: function () {
+
+            },
+
+            sayHello: function () {
+                alert("Hello!");
+            }
+        });
+    </script>
+</head>
+<body class="sapUiBody" role="application">
+    <div id="content"></div>
+</body>
+</html>
